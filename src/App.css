@@ -4,8 +4,8 @@
   --secondary-color: #4f5f6e;
   --accent-color: #fae4c5;
   --bg-dark: #181716;
-  --bg-darker: #25221f;
-  --bg-card: #1f1d1a;
+  --bg-darker: #111010;
+  --bg-card: #20201f;
   --text-primary: #fae4c5;
   --text-secondary: #d4c4a8;
   --text-muted: #a89d8a;
@@ -20,7 +20,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(37, 34, 31, 0.8);
+  background: rgba(34, 32, 29, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   padding: 1rem 0;
