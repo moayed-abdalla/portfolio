@@ -11,6 +11,7 @@
   --text-muted: #a89d8a;
   --border-color: #4f5f6e;
   --shadow-glow: 0 0 10px rgba(250, 228, 197, 0.2);
+  --nav-bg: rgba(46, 44, 42, 0.8);
 }
 
 /* Variables - Light Mode */
@@ -22,10 +23,11 @@
   --bg-darker: #f5f3f0;
   --bg-card: #e8e6e3;
   --text-primary: #2d3436;
-  --text-secondary: #4f5f6e;
-  --text-muted: #6c757d;
+  --text-secondary: #293138;
+  --text-muted: #53595e;  
   --border-color: #d4c4a8;
   --shadow-glow: 0 0 10px rgba(79, 95, 110, 0.2);
+  --nav-bg: rgba(245, 243, 240, 0.8);
 }
 
 /* Navigation */
@@ -35,7 +37,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(46, 44, 42, 0.8);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   padding: 1rem 0;
@@ -73,17 +75,33 @@
 .theme-toggle {
   background: transparent;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 1001;
   order: 3;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: 0.5rem;
+}
+
+.theme-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: var(--primary-color);
+  transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
   transform: scale(1.1);
+}
+
+.theme-toggle:hover svg {
+  stroke: var(--secondary-color);
 }
 
 .hamburger-menu {
@@ -830,7 +848,8 @@
 
   .theme-toggle {
     order: 2;
-    margin-right: 1rem;
+    margin-left: 0;
+    margin-right: 0.5rem;
   }
 
   .menu-overlay {
