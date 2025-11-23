@@ -26,6 +26,7 @@ interface Education {
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({})
 
   useEffect(() => {
@@ -52,13 +53,6 @@ function App() {
 
   const projects: Project[] = [
     {
-      title: 'Portfolio',
-      status: 'completed',
-      description: 'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
-      technologies: ['React', 'TypeScript', 'CSS'],
-      githubUrl: 'https://github.com/moayed-abdalla/portfolio'
-    },
-    {
       title: 'Recipe Almanac',
       status: 'development',
       description: 'This is the Recipe Almanac, a digital recipe book you can share, browse and write your own. I am tired of recipe pages that just want your email to add you to mailing list or want you to pay for a subscription or just covered in ads. This page will never have any of those and is here to be every cook\'s and baker\'s recipe book.',
@@ -73,9 +67,16 @@ function App() {
       githubUrl: 'https://github.com/moayed-abdalla/PyBI_2.0'
     },
     {
+      title: 'Portfolio',
+      status: 'completed',
+      description: 'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
+      technologies: ['React', 'TypeScript', 'CSS'],
+      githubUrl: 'https://github.com/moayed-abdalla/portfolio'
+    },
+    {
       title: 'OpenStreetMap Data Scraping & Clustering',
       status: 'completed',
-      description: 'Multi-threaded processing algorithm for solar and wind data scraping and clustering from OpenStreetMap.',
+      description: 'Multi-threaded processing algorithm for solar and wind data scraping and clustering from OpenStreetMap. (Under NDA)',
       technologies: ['Python', 'Multi-threading', 'Data Scraping', 'Clustering'],
       githubUrl: 'https://github.com/moayed-abdalla'
     },
@@ -146,14 +147,6 @@ function App() {
     }
   ]
 
-  const skills = {
-    'Data Engineering': ['AWS (Data pipeline Automation, Cloud Computing, DevOps)', 'Data Scraping', 'Data Cleaning', 'Building ETL pipelines', 'Postgres (RDBMS)'],
-    'Business Analytics': ['Data Visualization', 'Big Data Analytics', 'Financial Management', 'Machine Learning', 'KPI dashboards with python', 'Looker Studio', 'Tableau'],
-    'Programming': ['Python', 'SQL (PostgreSQL)', 'JavaScript', 'Swift'],
-    'Computing': ['Version Control (Git)', 'GitHub', 'Excel (Advanced)', 'Microsoft Office Suite'],
-    'Engineering Design': ['SolidWorks', 'Ansys', '3D Printing (FDM/SLA)', 'Engineering Drawings'],
-    'Project Management': ['Agile Methodology', 'Team coordination', 'Six Sigma Methodology']
-  }
 
   return (
     <div className="App">
@@ -161,13 +154,24 @@ function App() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-logo">Moayed</div>
-          <div className="nav-links">
-            <a href="#hero" className={activeSection === 'hero' ? 'active' : ''}>Home</a>
-            <a href="#about" className={activeSection === 'about' ? 'active' : ''}>About</a>
-            <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>Projects</a>
-            <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>Experience</a>
-            <a href="#skills" className={activeSection === 'skills' ? 'active' : ''}>Skills</a>
-            <a href="#contact" className={activeSection === 'contact' ? 'active' : ''}>Contact</a>
+          <button 
+            className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          {isMenuOpen && (
+            <div className="menu-overlay" onClick={() => setIsMenuOpen(false)}></div>
+          )}
+          <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+            <a href="#hero" className={activeSection === 'hero' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Home</a>
+            <a href="#about" className={activeSection === 'about' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>About</a>
+            <a href="#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Projects</a>
+            <a href="#experience" className={activeSection === 'experience' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Experience</a>
+            <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Contact</a>
           </div>
         </div>
       </nav>
@@ -183,12 +187,8 @@ function App() {
             <span className="name-line">Moayed</span>
             <span className="name-line">Abdalla</span>
           </h1>
-          <div className="hero-subtitle">
-            <span className="typing-text">Data Engineer</span>
-            <span className="cursor">|</span>
-          </div>
           <p className="hero-description">
-            Transforming data into insights • Building scalable solutions • Engineering excellence
+            Data Engineer • Business Analyst • Technical Manager
           </p>
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">View Projects</a>
@@ -327,33 +327,11 @@ function App() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" ref={(el) => (sectionsRef.current['skills'] = el)} className="section skills">
-        <div className="container">
-          <h2 className="section-title">
-            <span className="title-number">05.</span>
-            Skills
-          </h2>
-          <div className="skills-grid">
-            {Object.entries(skills).map(([category, items], index) => (
-              <div key={index} className="skill-category">
-                <h3>{category}</h3>
-                <div className="skill-items">
-                  {items.map((item, i) => (
-                    <span key={i} className="skill-item">{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" ref={(el) => (sectionsRef.current['contact'] = el)} className="section contact">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">06.</span>
+            <span className="title-number">05.</span>
             Get In Touch
           </h2>
           <div className="contact-content">
