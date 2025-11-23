@@ -14,9 +14,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #25221f;
-  color: #fae4c5;
+  background: #111010;
+  color: var(--text-primary);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
@@ -30,20 +31,25 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #25221f;
+  background: var(--bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4f5f6e;
+  background: var(--secondary-color);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #fae4c5;
+  background: var(--primary-color);
 }
 
 /* Selection */
 ::selection {
   background: rgba(250, 228, 197, 0.3);
-  color: #25221f;
+  color: var(--bg-dark);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(79, 95, 110, 0.3);
+  color: var(--bg-dark);
 }

@@ -27,7 +27,22 @@ interface Education {
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme')
+      if (saved) {
+        return saved === 'dark'
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return true
+  })
   const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({})
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light')
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
+  }, [isDarkMode])
 
   useEffect(() => {
     const observerOptions = {
@@ -155,6 +170,13 @@ function App() {
         <div className="nav-container">
           <div className="nav-logo">Moayed</div>
           <button 
+            className="theme-toggle"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            aria-label="Toggle theme"
+          >
+            {isDarkMode ? '☀️' : '🌙'}
+          </button>
+          <button 
             className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
@@ -184,8 +206,7 @@ function App() {
         </div>
         <div className="hero-content">
           <h1 className="hero-name">
-            <span className="name-line">Moayed</span>
-            <span className="name-line">Abdalla</span>
+            Moayed Abdalla
           </h1>
           <p className="hero-description">
             Data Engineer • Business Analyst • Technical Manager
@@ -204,8 +225,7 @@ function App() {
       <section id="about" ref={(el) => (sectionsRef.current['about'] = el)} className="section about">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">01.</span>
-            About Me
+            01. About Me
           </h2>
           <div className="about-content">
             <div className="about-text">
@@ -233,8 +253,7 @@ function App() {
       <section id="projects" ref={(el) => (sectionsRef.current['projects'] = el)} className="section projects">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">02.</span>
-            Projects
+            02. Projects
           </h2>
           <div className="projects-grid">
             {projects.map((project, index) => (
@@ -270,8 +289,7 @@ function App() {
       <section id="experience" ref={(el) => (sectionsRef.current['experience'] = el)} className="section experience">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">03.</span>
-            Experience
+            03. Experience
           </h2>
           <div className="timeline">
             {experiences.map((exp, index) => (
@@ -302,8 +320,7 @@ function App() {
       <section id="education" ref={(el) => (sectionsRef.current['education'] = el)} className="section education">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">04.</span>
-            Education
+            04. Education
           </h2>
           <div className="education-grid">
             {education.map((edu, index) => (
@@ -331,8 +348,7 @@ function App() {
       <section id="contact" ref={(el) => (sectionsRef.current['contact'] = el)} className="section contact">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">05.</span>
-            Get In Touch
+            05. Get In Touch
           </h2>
           <div className="contact-content">
             <p className="contact-description">
