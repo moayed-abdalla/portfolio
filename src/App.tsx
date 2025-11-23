@@ -157,7 +157,7 @@ function App() {
     {
       degree: 'Bachelor of Mechanical Engineering',
       institution: 'University of Southampton',
-      period: '2019 – 2024',
+      period: '2020 – 2024',
       courses: ['Finite Element Analysis', 'Materials and Manufacturing', 'Engineering Design and Management', 'Thermodynamics', 'Design and Computing']
     }
   ]

@@ -521,6 +521,12 @@
   background: var(--primary-color);
 }
 
+@media (max-width: 1024px) {
+  .timeline::before {
+    display: none;
+  }
+}
+
 .timeline-item {
   position: relative;
   margin-bottom: 3rem;
