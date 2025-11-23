@@ -6,6 +6,7 @@ interface Project {
   status: 'development' | 'completed'
   description: string
   technologies: string[]
+  githubUrl: string
 }
 
 interface Experience {
@@ -51,34 +52,46 @@ function App() {
 
   const projects: Project[] = [
     {
+      title: 'Portfolio',
+      status: 'completed',
+      description: 'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
+      technologies: ['React', 'TypeScript', 'CSS'],
+      githubUrl: 'https://github.com/moayed-abdalla/portfolio'
+    },
+    {
       title: 'Recipe Almanac',
       status: 'development',
       description: 'This is the Recipe Almanac, a digital recipe book you can share, browse and write your own. I am tired of recipe pages that just want your email to add you to mailing list or want you to pay for a subscription or just covered in ads. This page will never have any of those and is here to be every cook\'s and baker\'s recipe book.',
-      technologies: ['React', 'Node.js', 'Database']
+      technologies: ['React', 'Node.js', 'Database'],
+      githubUrl: 'https://github.com/moayed-abdalla/Recipe_Almanac'
     },
     {
       title: 'PyBI Dash',
       status: 'development',
       description: 'Dynamic KPI Dashboard Builder (Streamlit App). A "full-stack" Python application built with Streamlit that allows business analysts and data engineers to quickly build and customize a KPI dashboard by uploading their own data. Features include data upload (CSV/Excel), multiple chart types, interactive configuration, and responsive dark/light mode.',
-      technologies: ['Python', 'Streamlit', 'Pandas', 'Plotly']
+      technologies: ['Python', 'Streamlit', 'Pandas', 'Plotly'],
+      githubUrl: 'https://github.com/moayed-abdalla/PyBI_2.0'
     },
     {
       title: 'OpenStreetMap Data Scraping & Clustering',
       status: 'completed',
       description: 'Multi-threaded processing algorithm for solar and wind data scraping and clustering from OpenStreetMap.',
-      technologies: ['Python', 'Multi-threading', 'Data Scraping', 'Clustering']
+      technologies: ['Python', 'Multi-threading', 'Data Scraping', 'Clustering'],
+      githubUrl: 'https://github.com/moayed-abdalla'
     },
     {
       title: 'New York Coffee Chain Data Study',
       status: 'completed',
       description: 'Transactional data study and dashboard built on Python (pandas) using Streamlit and Plotly to analyze coffee chain performance and provide business insights.',
-      technologies: ['Python', 'Pandas', 'Streamlit', 'Plotly', 'Data Analysis']
+      technologies: ['Python', 'Pandas', 'Streamlit', 'Plotly', 'Data Analysis'],
+      githubUrl: 'https://github.com/moayed-abdalla'
     },
     {
       title: 'Cookie Shop Full Stack Website',
       status: 'completed',
       description: 'Full stack e-commerce website built with JavaScript, React, and Node.js using SQL for data management on Supabase.',
-      technologies: ['JavaScript', 'React', 'Node.js', 'SQL', 'Supabase']
+      technologies: ['JavaScript', 'React', 'Node.js', 'SQL', 'Supabase'],
+      githubUrl: 'https://github.com/moayed-abdalla'
     }
   ]
 
@@ -151,8 +164,8 @@ function App() {
           <div className="nav-links">
             <a href="#hero" className={activeSection === 'hero' ? 'active' : ''}>Home</a>
             <a href="#about" className={activeSection === 'about' ? 'active' : ''}>About</a>
-            <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>Experience</a>
             <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>Projects</a>
+            <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>Experience</a>
             <a href="#skills" className={activeSection === 'skills' ? 'active' : ''}>Skills</a>
             <a href="#contact" className={activeSection === 'contact' ? 'active' : ''}>Contact</a>
           </div>
@@ -211,21 +224,44 @@ function App() {
                 dashboards, is complemented by a proven ability to lead teams, manage projects, and communicate 
                 effectively with executives and clients across diverse cultural environments.
               </p>
-              <div className="about-highlights">
-                <div className="highlight-item">
-                  <span className="highlight-number">5+</span>
-                  <span className="highlight-label">Years Experience</span>
-                </div>
-                <div className="highlight-item">
-                  <span className="highlight-number">10+</span>
-                  <span className="highlight-label">Projects Completed</span>
-                </div>
-                <div className="highlight-item">
-                  <span className="highlight-number">3</span>
-                  <span className="highlight-label">Companies</span>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" ref={(el) => (sectionsRef.current['projects'] = el)} className="section projects">
+        <div className="container">
+          <h2 className="section-title">
+            <span className="title-number">02.</span>
+            Projects
+          </h2>
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <div key={index} className={`project-card ${project.status}`}>
+                <div className="project-header">
+                  <h3>{project.title}</h3>
+                  <span className={`project-status ${project.status}`}>
+                    {project.status === 'development' ? 'In Development' : 'Completed'}
+                  </span>
+                </div>
+                <p className="project-description">{project.description}</p>
+                <div className="project-technologies">
+                  {project.technologies.map((tech, i) => (
+                    <span key={i} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+                <a 
+                  href={project.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="project-github-link"
+                >
+                  <span className="github-icon">🔗</span>
+                  View on GitHub
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -234,7 +270,7 @@ function App() {
       <section id="experience" ref={(el) => (sectionsRef.current['experience'] = el)} className="section experience">
         <div className="container">
           <h2 className="section-title">
-            <span className="title-number">02.</span>
+            <span className="title-number">03.</span>
             Experience
           </h2>
           <div className="timeline">
@@ -255,34 +291,6 @@ function App() {
                       <li key={i}>{resp}</li>
                     ))}
                   </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" ref={(el) => (sectionsRef.current['projects'] = el)} className="section projects">
-        <div className="container">
-          <h2 className="section-title">
-            <span className="title-number">03.</span>
-            Projects
-          </h2>
-          <div className="projects-grid">
-            {projects.map((project, index) => (
-              <div key={index} className={`project-card ${project.status}`}>
-                <div className="project-header">
-                  <h3>{project.title}</h3>
-                  <span className={`project-status ${project.status}`}>
-                    {project.status === 'development' ? 'In Development' : 'Completed'}
-                  </span>
-                </div>
-                <p className="project-description">{project.description}</p>
-                <div className="project-technologies">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} className="tech-tag">{tech}</span>
-                  ))}
                 </div>
               </div>
             ))}
