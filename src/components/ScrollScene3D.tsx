@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera } from '@react-three/drei'
 import { FloatingCube } from './FloatingCube'
 import { FloatingSphere } from './FloatingSphere'
 
@@ -9,15 +9,24 @@ interface ScrollScene3DProps {
 }
 
 export function ScrollScene3D({ scrollY, sectionOffset }: ScrollScene3DProps) {
+  const [isClient, setIsClient] = useState(false)
   const relativeScroll = scrollY - sectionOffset
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
   
   return (
     <Canvas
+      camera={{ position: [0, 0, 5], fov: 75 }}
       gl={{ antialias: true, alpha: true }}
       dpr={[1, 2]}
       performance={{ min: 0.5 }}
     >
-      <PerspectiveCamera makeDefault position={[0, 0, 5]} />
       <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={0.6} />
       

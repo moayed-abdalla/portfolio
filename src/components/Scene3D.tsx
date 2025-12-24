@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera } from '@react-three/drei'
 import { FloatingCube } from './FloatingCube'
 import { FloatingSphere } from './FloatingSphere'
 
@@ -9,13 +9,23 @@ interface Scene3DProps {
 }
 
 export function Scene3D({ scrollY, mousePosition }: Scene3DProps) {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) {
+    return null
+  }
+
   return (
     <Canvas
+      camera={{ position: [0, 0, 5], fov: 75 }}
       gl={{ antialias: true, alpha: true }}
       dpr={[1, 2]}
       performance={{ min: 0.5 }}
     >
-      <PerspectiveCamera makeDefault position={[0, 0, 5]} />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.8} />
       <pointLight position={[-10, -10, -10]} intensity={0.3} />
