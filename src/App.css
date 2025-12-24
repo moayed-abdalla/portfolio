@@ -217,6 +217,57 @@
   bottom: 0;
   z-index: -1;
   background: var(--bg-dark);
+  overflow: hidden;
+}
+
+.cursor-interaction {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(250, 228, 197, 0.08) 0%,
+    rgba(250, 228, 197, 0.03) 30%,
+    transparent 70%
+  );
+  transition: background 0.15s ease-out;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+[data-theme="light"] .cursor-interaction {
+  background: radial-gradient(
+    circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(79, 95, 110, 0.06) 0%,
+    rgba(79, 95, 110, 0.02) 30%,
+    transparent 70%
+  );
+}
+
+.hero-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.section-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .grid-overlay {
@@ -230,6 +281,12 @@
     linear-gradient(90deg, rgba(250, 228, 197, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   animation: gridMove 20s linear infinite;
+  transform: translate(
+    calc(var(--mouse-x-px, 0px) * 0.01), 
+    calc(var(--mouse-y-px, 0px) * 0.01)
+  );
+  transition: transform 0.15s ease-out;
+  z-index: 0;
 }
 
 @keyframes gridMove {
@@ -275,7 +332,8 @@
 
 .hero-content {
   text-align: center;
-  z-index: 1;
+  z-index: 2;
+  position: relative;
   animation: fadeInUp 1s ease-out;
 }
 
@@ -421,6 +479,12 @@
   padding: 6rem 0;
   position: relative;
   animation: fadeIn 0.8s ease-out;
+  overflow: hidden;
+}
+
+.section .container {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes fadeIn {

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import { Scene3D } from './components/Scene3D'
+import { ScrollScene3D } from './components/ScrollScene3D'
 
 interface Project {
   title: string
@@ -37,12 +39,48 @@ function App() {
     }
     return true
   })
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({})
+  const heroRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light')
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
   }, [isDarkMode])
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Track mouse position for cursor interaction
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+      
+      // Update hero background parallax
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect()
+        const x = ((e.clientX - rect.left) / rect.width) * 100
+        const y = ((e.clientY - rect.top) / rect.height) * 100
+        heroRef.current.style.setProperty('--mouse-x', `${x}%`)
+        heroRef.current.style.setProperty('--mouse-y', `${y}%`)
+        
+        // Also update mouse position in pixels for grid transform
+        const xPx = e.clientX - rect.left
+        const yPx = e.clientY - rect.top
+        heroRef.current.style.setProperty('--mouse-x-px', `${xPx}px`)
+        heroRef.current.style.setProperty('--mouse-y-px', `${yPx}px`)
+      }
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   useEffect(() => {
     const observerOptions = {
@@ -215,10 +253,21 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" ref={(el) => (sectionsRef.current['hero'] = el)} className="hero">
+      <section 
+        id="hero" 
+        ref={(el) => {
+          sectionsRef.current['hero'] = el
+          heroRef.current = el
+        }} 
+        className="hero"
+      >
         <div className="hero-background">
           <div className="grid-overlay"></div>
           <div className="data-particles"></div>
+          <div className="cursor-interaction"></div>
+        </div>
+        <div className="hero-3d-container">
+          <Scene3D scrollY={scrollY} mousePosition={mousePosition} />
         </div>
         <div className="hero-content">
           <h1 className="hero-name">
@@ -239,6 +288,9 @@ function App() {
 
       {/* About Section */}
       <section id="about" ref={(el) => (sectionsRef.current['about'] = el)} className="section about">
+        <div className="section-3d-container">
+          <ScrollScene3D scrollY={scrollY} sectionOffset={heroRef.current?.offsetHeight || 0} />
+        </div>
         <div className="container">
           <h2 className="section-title">
             01. About Me
@@ -267,6 +319,9 @@ function App() {
 
       {/* Projects Section */}
       <section id="projects" ref={(el) => (sectionsRef.current['projects'] = el)} className="section projects">
+        <div className="section-3d-container">
+          <ScrollScene3D scrollY={scrollY} sectionOffset={(heroRef.current?.offsetHeight || 0) + (sectionsRef.current['about']?.offsetHeight || 0)} />
+        </div>
         <div className="container">
           <h2 className="section-title">
             02. Projects
@@ -307,6 +362,16 @@ function App() {
 
       {/* Experience Section */}
       <section id="experience" ref={(el) => (sectionsRef.current['experience'] = el)} className="section experience">
+        <div className="section-3d-container">
+          <ScrollScene3D 
+            scrollY={scrollY} 
+            sectionOffset={
+              (heroRef.current?.offsetHeight || 0) + 
+              (sectionsRef.current['about']?.offsetHeight || 0) + 
+              (sectionsRef.current['projects']?.offsetHeight || 0)
+            } 
+          />
+        </div>
         <div className="container">
           <h2 className="section-title">
             03. Experience
