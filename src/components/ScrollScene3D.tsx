@@ -23,9 +23,21 @@ export function ScrollScene3D({ scrollY, sectionOffset }: ScrollScene3DProps) {
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 75 }}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ 
+        antialias: true, 
+        alpha: true,
+        preserveDrawingBuffer: false,
+        powerPreference: "high-performance"
+      }}
       dpr={[1, 2]}
       performance={{ min: 0.5 }}
+      style={{ background: 'transparent' }}
+      onCreated={({ gl }) => {
+        gl.setClearColor('#000000', 0)
+      }}
+      onError={(error) => {
+        console.error('Canvas error:', error)
+      }}
     >
       <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={0.6} />
