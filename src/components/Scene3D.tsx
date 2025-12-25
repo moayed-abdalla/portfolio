@@ -32,9 +32,6 @@ export function Scene3D({ scrollY }: Scene3DProps) {
       onCreated={({ gl }) => {
         gl.setClearColor('#000000', 0)
       }}
-      onError={(error: Error) => {
-        console.error('Canvas error:', error)
-      }}
     >
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.8} />

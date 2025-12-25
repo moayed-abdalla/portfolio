@@ -34,9 +34,6 @@ export function ScrollScene3D({ scrollY, sectionOffset }: ScrollScene3DProps) {
       onCreated={({ gl }) => {
         gl.setClearColor('#000000', 0)
       }}
-      onError={(error: Error) => {
-        console.error('Canvas error:', error)
-      }}
     >
       <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={0.6} />

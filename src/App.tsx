@@ -26,6 +26,129 @@ interface Education {
   courses?: string[]
 }
 
+const NAV_LINKS = [
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' }
+]
+
+const PROJECTS: Project[] = [
+  {
+    title: 'Recipe Almanac',
+    status: 'development',
+    description:
+      "This is the Recipe Almanac, a digital recipe book you can share, browse and write your own. I am tired of recipe pages that just want your email to add you to mailing list or want you to pay for a subscription or just covered in ads. This page will never have any of those and is here to be every cook's and baker's recipe book.",
+    technologies: ['React', 'Node.js', 'Database'],
+    githubUrl: 'https://github.com/moayed-abdalla/Recipe_Almanac'
+  },
+  {
+    title: 'PyBI Dash',
+    status: 'development',
+    description:
+      'Dynamic KPI Dashboard Builder (Streamlit App). A "full-stack" Python application built with Streamlit that allows business analysts and data engineers to quickly build and customize a KPI dashboard by uploading their own data. Features include data upload (CSV/Excel), multiple chart types, interactive configuration, and responsive dark/light mode.',
+    technologies: ['Python', 'Streamlit', 'Pandas', 'Plotly'],
+    githubUrl: 'https://github.com/moayed-abdalla/PyBI_2.0'
+  },
+  {
+    title: 'Portfolio',
+    status: 'completed',
+    description:
+      'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
+    technologies: ['React', 'TypeScript', 'CSS'],
+    githubUrl: 'https://github.com/moayed-abdalla/portfolio'
+  },
+  {
+    title: 'OpenStreetMap Data Scraping & Clustering',
+    status: 'completed',
+    description:
+      'Multi-threaded processing algorithm for solar and wind data scraping and clustering from OpenStreetMap. (Under NDA)',
+    technologies: ['Python', 'Multi-threading', 'Data Scraping', 'Clustering'],
+    githubUrl: 'https://github.com/moayed-abdalla'
+  },
+  {
+    title: 'New York Coffee Chain Data Study',
+    status: 'completed',
+    description:
+      'Transactional data study and dashboard built on Python (pandas) using Streamlit and Plotly to analyze coffee chain performance and provide business insights.',
+    technologies: ['Python', 'Pandas', 'Streamlit', 'Plotly', 'Data Analysis'],
+    githubUrl: 'https://github.com/moayed-abdalla'
+  },
+  {
+    title: 'Cookie Shop Full Stack Website',
+    status: 'completed',
+    description:
+      'Full stack e-commerce website built with JavaScript, React, and Node.js using SQL for data management on Supabase.',
+    technologies: ['JavaScript', 'React', 'Node.js', 'SQL', 'Supabase'],
+    githubUrl: 'https://github.com/moayed-abdalla'
+  }
+]
+
+const EXPERIENCES: Experience[] = [
+  {
+    title: 'Technical Manager',
+    company: 'Impact Fundry',
+    location: 'London (Hybrid)',
+    period: 'July 2025 – Ongoing',
+    responsibilities: [
+      'Project management and team coordination, using agile methodology to optimise company workflows',
+      'Developing and maintaining websites and backend automation systems',
+      'Tracking company internal and external metrics, building dashboards and advising on business direction based on data'
+    ]
+  },
+  {
+    title: 'Data Engineer',
+    company: 'Ambrrr',
+    location: 'Singapore (Remote)',
+    period: 'October 2022 – June 2025',
+    responsibilities: [
+      'Built and maintained complex ETL pipelines using Python, REST APIs, and SQL to streamline data flow and integration',
+      'Developed backend analytics logic and contributed to DevOps workflows to improve application performance and deployment efficiency',
+      'Designed and delivered insightful data visualizations and dashboards to support product and operational decision-making'
+    ]
+  },
+  {
+    title: 'Data Manager Internship',
+    company: 'Quizona',
+    location: 'Malaysia',
+    period: 'June 2021 - November 2021',
+    responsibilities: [
+      'Managed and organized data to ensure accuracy and accessibility for users and team members, additionally developed KPI dashboards for review of metrics',
+      'Developed project scraping algorithm to recognise and filter data into usable forms for use within the app',
+      'Constructed model questions to enhance the educational content of the application'
+    ]
+  }
+]
+
+const EDUCATION: Education[] = [
+  {
+    degree: 'Master of Business Analytics',
+    institution: 'O. P. Jindal Global University',
+    period: '2025 – 2026',
+    courses: [
+      'Advanced Business Analytics',
+      'Big Data Analytics',
+      'Managing People & Organizations',
+      'Financial Management',
+      'DB Management',
+      'Financial Accounting'
+    ]
+  },
+  {
+    degree: 'Bachelor of Mechanical Engineering',
+    institution: 'University of Southampton',
+    period: '2020 – 2024',
+    courses: [
+      'Finite Element Analysis',
+      'Materials and Manufacturing',
+      'Engineering Design and Management',
+      'Thermodynamics',
+      'Design and Computing'
+    ]
+  }
+]
+
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -40,7 +163,6 @@ function App() {
     return true
   })
   const [scrollY, setScrollY] = useState(0)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({})
   const heroRef = useRef<HTMLElement | null>(null)
 
@@ -61,8 +183,6 @@ function App() {
   // Track mouse position for cursor interaction
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-      
       // Update hero background parallax
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect()
@@ -103,103 +223,6 @@ function App() {
 
     return () => observer.disconnect()
   }, [])
-
-  const projects: Project[] = [
-    {
-      title: 'Recipe Almanac',
-      status: 'development',
-      description: 'This is the Recipe Almanac, a digital recipe book you can share, browse and write your own. I am tired of recipe pages that just want your email to add you to mailing list or want you to pay for a subscription or just covered in ads. This page will never have any of those and is here to be every cook\'s and baker\'s recipe book.',
-      technologies: ['React', 'Node.js', 'Database'],
-      githubUrl: 'https://github.com/moayed-abdalla/Recipe_Almanac'
-    },
-    {
-      title: 'PyBI Dash',
-      status: 'development',
-      description: 'Dynamic KPI Dashboard Builder (Streamlit App). A "full-stack" Python application built with Streamlit that allows business analysts and data engineers to quickly build and customize a KPI dashboard by uploading their own data. Features include data upload (CSV/Excel), multiple chart types, interactive configuration, and responsive dark/light mode.',
-      technologies: ['Python', 'Streamlit', 'Pandas', 'Plotly'],
-      githubUrl: 'https://github.com/moayed-abdalla/PyBI_2.0'
-    },
-    {
-      title: 'Portfolio',
-      status: 'completed',
-      description: 'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
-      technologies: ['React', 'TypeScript', 'CSS'],
-      githubUrl: 'https://github.com/moayed-abdalla/portfolio'
-    },
-    {
-      title: 'OpenStreetMap Data Scraping & Clustering',
-      status: 'completed',
-      description: 'Multi-threaded processing algorithm for solar and wind data scraping and clustering from OpenStreetMap. (Under NDA)',
-      technologies: ['Python', 'Multi-threading', 'Data Scraping', 'Clustering'],
-      githubUrl: 'https://github.com/moayed-abdalla'
-    },
-    {
-      title: 'New York Coffee Chain Data Study',
-      status: 'completed',
-      description: 'Transactional data study and dashboard built on Python (pandas) using Streamlit and Plotly to analyze coffee chain performance and provide business insights.',
-      technologies: ['Python', 'Pandas', 'Streamlit', 'Plotly', 'Data Analysis'],
-      githubUrl: 'https://github.com/moayed-abdalla'
-    },
-    {
-      title: 'Cookie Shop Full Stack Website',
-      status: 'completed',
-      description: 'Full stack e-commerce website built with JavaScript, React, and Node.js using SQL for data management on Supabase.',
-      technologies: ['JavaScript', 'React', 'Node.js', 'SQL', 'Supabase'],
-      githubUrl: 'https://github.com/moayed-abdalla'
-    }
-  ]
-
-  const experiences: Experience[] = [
-    {
-      title: 'Technical Manager',
-      company: 'Impact Fundry',
-      location: 'London (Hybrid)',
-      period: 'July 2025 – Ongoing',
-      responsibilities: [
-        'Project management and team coordination, using agile methodology to optimise company workflows',
-        'Developing and maintaining websites and backend automation systems',
-        'Tracking company internal and external metrics, building dashboards and advising on business direction based on data'
-      ]
-    },
-    {
-      title: 'Data Engineer',
-      company: 'Ambrrr',
-      location: 'Singapore (Remote)',
-      period: 'October 2022 – June 2025',
-      responsibilities: [
-        'Built and maintained complex ETL pipelines using Python, REST APIs, and SQL to streamline data flow and integration',
-        'Developed backend analytics logic and contributed to DevOps workflows to improve application performance and deployment efficiency',
-        'Designed and delivered insightful data visualizations and dashboards to support product and operational decision-making'
-      ]
-    },
-    {
-      title: 'Data Manager Internship',
-      company: 'Quizona',
-      location: 'Malaysia',
-      period: 'June 2021 - November 2021',
-      responsibilities: [
-        'Managed and organized data to ensure accuracy and accessibility for users and team members, additionally developed KPI dashboards for review of metrics',
-        'Developed project scraping algorithm to recognise and filter data into usable forms for use within the app',
-        'Constructed model questions to enhance the educational content of the application'
-      ]
-    }
-  ]
-
-  const education: Education[] = [
-    {
-      degree: 'Master of Business Analytics',
-      institution: 'O. P. Jindal Global University',
-      period: '2025 – 2026',
-      courses: ['Advanced Business Analytics', 'Big Data Analytics', 'Managing People & Organizations', 'Financial Management', 'DB Management', 'Financial Accounting']
-    },
-    {
-      degree: 'Bachelor of Mechanical Engineering',
-      institution: 'University of Southampton',
-      period: '2020 – 2024',
-      courses: ['Finite Element Analysis', 'Materials and Manufacturing', 'Engineering Design and Management', 'Thermodynamics', 'Design and Computing']
-    }
-  ]
-
 
   return (
     <div className="App">
@@ -243,11 +266,16 @@ function App() {
             <div className="menu-overlay" onClick={() => setIsMenuOpen(false)}></div>
           )}
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#hero" className={activeSection === 'hero' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Home</a>
-            <a href="#about" className={activeSection === 'about' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>About</a>
-            <a href="#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Projects</a>
-            <a href="#experience" className={activeSection === 'experience' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Experience</a>
-            <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>Contact</a>
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className={activeSection === link.id ? 'active' : ''}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
@@ -327,7 +355,7 @@ function App() {
             02. Projects
           </h2>
           <div className="projects-grid">
-            {projects.map((project, index) => (
+            {PROJECTS.map((project, index) => (
               <div key={index} className={`project-card ${project.status}`}>
                 <div className="project-header">
                   <h3>{project.title}</h3>
@@ -377,7 +405,7 @@ function App() {
             03. Experience
           </h2>
           <div className="timeline">
-            {experiences.map((exp, index) => (
+            {EXPERIENCES.map((exp, index) => (
               <div key={index} className="timeline-item">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
@@ -408,7 +436,7 @@ function App() {
             04. Education
           </h2>
           <div className="education-grid">
-            {education.map((edu, index) => (
+            {EDUCATION.map((edu, index) => (
               <div key={index} className="education-card">
                 <h3>{edu.degree}</h3>
                 <p className="education-institution">{edu.institution}</p>
