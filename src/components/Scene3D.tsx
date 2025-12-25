@@ -5,10 +5,9 @@ import { FloatingSphere } from './FloatingSphere'
 
 interface Scene3DProps {
   scrollY: number
-  mousePosition: { x: number; y: number }
 }
 
-export function Scene3D({ scrollY, mousePosition }: Scene3DProps) {
+export function Scene3D({ scrollY }: Scene3DProps) {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -30,11 +29,10 @@ export function Scene3D({ scrollY, mousePosition }: Scene3DProps) {
       }}
       dpr={[1, 2]}
       performance={{ min: 0.5 }}
-      style={{ background: 'transparent' }}
       onCreated={({ gl }) => {
         gl.setClearColor('#000000', 0)
       }}
-      onError={(error) => {
+      onError={(error: Error) => {
         console.error('Canvas error:', error)
       }}
     >

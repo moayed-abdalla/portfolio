@@ -267,7 +267,7 @@ function App() {
           <div className="cursor-interaction"></div>
         </div>
         <div className="hero-3d-container">
-          <Scene3D scrollY={scrollY} mousePosition={mousePosition} />
+          <Scene3D scrollY={scrollY} />
         </div>
         <div className="hero-content">
           <h1 className="hero-name">

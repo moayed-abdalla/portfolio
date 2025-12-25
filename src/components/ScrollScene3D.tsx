@@ -31,11 +31,10 @@ export function ScrollScene3D({ scrollY, sectionOffset }: ScrollScene3DProps) {
       }}
       dpr={[1, 2]}
       performance={{ min: 0.5 }}
-      style={{ background: 'transparent' }}
       onCreated={({ gl }) => {
         gl.setClearColor('#000000', 0)
       }}
-      onError={(error) => {
+      onError={(error: Error) => {
         console.error('Canvas error:', error)
       }}
     >
