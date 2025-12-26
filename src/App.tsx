@@ -180,28 +180,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Track mouse position for cursor interaction
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Update hero background parallax
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect()
-        const x = ((e.clientX - rect.left) / rect.width) * 100
-        const y = ((e.clientY - rect.top) / rect.height) * 100
-        heroRef.current.style.setProperty('--mouse-x', `${x}%`)
-        heroRef.current.style.setProperty('--mouse-y', `${y}%`)
-        
-        // Also update mouse position in pixels for grid transform
-        const xPx = e.clientX - rect.left
-        const yPx = e.clientY - rect.top
-        heroRef.current.style.setProperty('--mouse-x-px', `${xPx}px`)
-        heroRef.current.style.setProperty('--mouse-y-px', `${yPx}px`)
-      }
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -292,7 +270,6 @@ function App() {
         <div className="hero-background">
           <div className="grid-overlay"></div>
           <div className="data-particles"></div>
-          <div className="cursor-interaction"></div>
         </div>
         <div className="hero-3d-container">
           <Scene3D scrollY={scrollY} />
