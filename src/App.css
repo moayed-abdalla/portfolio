@@ -220,39 +220,6 @@
   overflow: hidden;
 }
 
-.hero-3d-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.hero-3d-container canvas {
-  background: transparent !important;
-  display: block;
-}
-
-.section-3d-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  opacity: 0.4;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.section-3d-container canvas {
-  background: transparent !important;
-  display: block;
-}
-
 .grid-overlay {
   position: absolute;
   top: 0;
