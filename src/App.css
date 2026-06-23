@@ -737,11 +737,18 @@
   border: 1px solid rgba(79, 95, 110, 0.3);
 }
 
-.project-github-link {
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.project-github-link,
+.project-website-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1rem;
   padding: 0.5rem 1rem;
   color: var(--primary-color);
   text-decoration: none;
@@ -751,13 +758,15 @@
   font-size: 0.9rem;
 }
 
-.project-github-link:hover {
+.project-github-link:hover,
+.project-website-link:hover {
   background: rgba(250, 228, 197, 0.1);
   border-color: var(--primary-color);
   transform: translateY(-2px);
 }
 
-.github-icon {
+.github-icon,
+.website-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -766,7 +775,8 @@
   flex-shrink: 0;
 }
 
-.github-icon svg {
+.github-icon svg,
+.website-icon svg {
   width: 100%;
   height: 100%;
   stroke: currentColor;

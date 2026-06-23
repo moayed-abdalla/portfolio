@@ -3,10 +3,11 @@ import './App.css'
 
 interface Project {
   title: string
-  status: 'development' | 'completed'
+  status: 'development' | 'completed' | 'V1.1'
   description: string
   technologies: string[]
   githubUrl: string
+  websiteUrl: string
 }
 
 interface Experience {
@@ -35,11 +36,30 @@ const NAV_LINKS = [
 const PROJECTS: Project[] = [
   {
     title: 'Recipe Almanac',
-    status: 'development',
+    status: 'V1.1',
     description:
       "This is the Recipe Almanac, a digital recipe book you can share, browse and write your own. I am tired of recipe pages that just want your email to add you to mailing list or want you to pay for a subscription or just covered in ads. This page will never have any of those and is here to be every cook's and baker's recipe book.",
     technologies: ['React', 'Node.js', 'Database'],
-    githubUrl: 'https://github.com/moayed-abdalla/Recipe_Almanac'
+    githubUrl: 'https://github.com/moayed-abdalla/Recipe_Almanac',
+    websiteUrl: 'https://recipealmanac.xyz'
+  },
+  {
+    title: 'Personal Cafe Directory',
+    status: 'completed',
+    description:
+    'Personal Cafe Directory that shows all the cafes I have visited with the scores and ratings that I have given each of them. A site that utlizes react-map-gl/maplibre to show a map of each cafe\'s locations along with its acerage score as well a leaderboard of all the cafes and a details page to see each cafe\'s strong suit.',
+    technologies: ['React', 'TypeScript', 'CSS', 'react-map-gl/maplibre'],
+    githubUrl: 'https://github.com/moayed-abdalla/Cafe_Directory',
+    websiteUrl: 'https://cafe-directory.vercel.app'
+  },
+  {
+    title: 'Portfolio',
+    status: 'completed',
+    description:
+    'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
+    technologies: ['React', 'TypeScript', 'CSS'],
+    githubUrl: 'https://github.com/moayed-abdalla/portfolio',
+    websiteUrl: 'https://moayed.xyz'
   },
   {
     title: 'PyBI Dash',
@@ -47,15 +67,8 @@ const PROJECTS: Project[] = [
     description:
       'Dynamic KPI Dashboard Builder (Streamlit App). A "full-stack" Python application built with Streamlit that allows business analysts and data engineers to quickly build and customize a KPI dashboard by uploading their own data. Features include data upload (CSV/Excel), multiple chart types, interactive configuration, and responsive dark/light mode.',
     technologies: ['Python', 'Streamlit', 'Pandas', 'Plotly'],
-    githubUrl: 'https://github.com/moayed-abdalla/PyBI_2.0'
-  },
-  {
-    title: 'Portfolio',
-    status: 'completed',
-    description:
-      'Personal portfolio website showcasing my projects, experience, and skills. Built with React and TypeScript with modern animations and responsive design.',
-    technologies: ['React', 'TypeScript', 'CSS'],
-    githubUrl: 'https://github.com/moayed-abdalla/portfolio'
+    githubUrl: 'https://github.com/moayed-abdalla/PyBI_2.0',
+    websiteUrl: ''
   },
   {
     title: 'OpenStreetMap Data Scraping & Clustering',
@@ -63,7 +76,8 @@ const PROJECTS: Project[] = [
     description:
       'Multi-threaded processing algorithm for solar and wind data scraping and clustering from OpenStreetMap. (Under NDA)',
     technologies: ['Python', 'Multi-threading', 'Data Scraping', 'Clustering'],
-    githubUrl: 'https://github.com/moayed-abdalla'
+    githubUrl: 'https://github.com/moayed-abdalla/Private-Ambrrr-Work/blob/master/V5.2%20.py',
+    websiteUrl: ''
   },
   {
     title: 'New York Coffee Chain Data Study',
@@ -71,28 +85,21 @@ const PROJECTS: Project[] = [
     description:
       'Transactional data study and dashboard built on Python (pandas) using Streamlit and Plotly to analyze coffee chain performance and provide business insights.',
     technologies: ['Python', 'Pandas', 'Streamlit', 'Plotly', 'Data Analysis'],
-    githubUrl: 'https://github.com/moayed-abdalla'
-  },
-  {
-    title: 'Cookie Shop Full Stack Website',
-    status: 'completed',
-    description:
-      'Full stack e-commerce website built with JavaScript, React, and Node.js using SQL for data management on Supabase.',
-    technologies: ['JavaScript', 'React', 'Node.js', 'SQL', 'Supabase'],
-    githubUrl: 'https://github.com/moayed-abdalla'
+    githubUrl: 'https://github.com/moayed-abdalla/Data-Projects-Profile/blob/main/Coffee_Shop_Data/Coffee_Shop_Dashboard.py',
+    websiteUrl: ''
   }
 ]
 
 const EXPERIENCES: Experience[] = [
   {
-    title: 'Technical Manager',
+    title: 'Technical Lead',
     company: 'Impact Fundry',
     location: 'London (Hybrid)',
     period: 'July 2025 – Ongoing',
     responsibilities: [
       'Project management and team coordination, using agile methodology to optimise company workflows',
-      'Developing and maintaining websites and backend automation systems',
-      'Tracking company internal and external metrics, building dashboards and advising on business direction based on data'
+      'Developed Internal operations tool which replaces numerous subscriptions and other tools to streamline company workflows and improve integration between tools such as Trello, Notion, Pandadoc, etc. all in one platform',
+      'Tracking company internal and external metrics, building dashboards to analyse company performance and advising on business direction based on data'
     ]
   },
   {
@@ -321,19 +328,38 @@ function App() {
                     <span key={i} className="tech-tag">{tech}</span>
                   ))}
                 </div>
-                <a 
-                  href={project.githubUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="project-github-link"
-                >
-                  <span className="github-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
-                  </span>
-                  GitHub
-                </a>
+                <div className="project-links">
+                  <a 
+                    href={project.githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="project-github-link"
+                  >
+                    <span className="github-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </span>
+                    GitHub
+                  </a>
+                  {project.websiteUrl !== '' && (
+                    <a 
+                      href={project.websiteUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="project-website-link"
+                    >
+                      <span className="website-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="2" y1="12" x2="22" y2="12"></line>
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                      </span>
+                      Website
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
