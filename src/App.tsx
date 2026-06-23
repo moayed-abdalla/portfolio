@@ -1,13 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
+type ProjectStatus = 'development' | 'completed' | { version: string }
+
 interface Project {
   title: string
-  status: 'development' | 'completed' | 'V1.1'
+  status: ProjectStatus
   description: string
   technologies: string[]
   githubUrl: string
   websiteUrl: string
+}
+
+function getProjectStatusLabel(status: ProjectStatus): string {
+  if (typeof status === 'object') return status.version
+  if (status === 'development') return 'In Development'
+  return 'Completed'
+}
+
+function getProjectStatusClass(status: ProjectStatus): string {
+  if (typeof status === 'object') return 'version'
+  return status
 }
 
 interface Experience {
@@ -36,7 +49,7 @@ const NAV_LINKS = [
 const PROJECTS: Project[] = [
   {
     title: 'Recipe Almanac',
-    status: 'V1.1',
+    status: { version: 'V1.1' },
     description:
       "This is the Recipe Almanac, a digital recipe book you can share, browse and write your own. I am tired of recipe pages that just want your email to add you to mailing list or want you to pay for a subscription or just covered in ads. This page will never have any of those and is here to be every cook's and baker's recipe book.",
     technologies: ['React', 'Node.js', 'Database'],
@@ -315,11 +328,11 @@ function App() {
           </h2>
           <div className="projects-grid">
             {PROJECTS.map((project, index) => (
-              <div key={index} className={`project-card ${project.status}`}>
+              <div key={index} className={`project-card ${getProjectStatusClass(project.status)}`}>
                 <div className="project-header">
                   <h3>{project.title}</h3>
-                  <span className={`project-status ${project.status}`}>
-                    {project.status === 'development' ? 'In Development' : 'Completed'}
+                  <span className={`project-status ${getProjectStatusClass(project.status)}`}>
+                    {getProjectStatusLabel(project.status)}
                   </span>
                 </div>
                 <p className="project-description">{project.description}</p>

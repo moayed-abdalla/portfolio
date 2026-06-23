@@ -710,6 +710,12 @@
   border: 1px solid var(--accent-color);
 }
 
+.project-status.version {
+  background: rgba(100, 180, 140, 0.2);
+  color: #64b48c;
+  border: 1px solid #64b48c;
+}
+
 .project-description {
   color: var(--text-secondary);
   line-height: 1.8;
